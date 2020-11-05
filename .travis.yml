@@ -1,6 +1,6 @@
 branches:
   only:
-    - 4.4
+    - master
 language: php
 git:
   depth: 1
