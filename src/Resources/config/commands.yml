@@ -1,0 +1,5 @@
+services:
+    convert.command.run:
+        class: Pdir\ConvertToBundle\Command\ConvertCommand
+        arguments: ["@contao.framework"]
+        tags: ['console.command']

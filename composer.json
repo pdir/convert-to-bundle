@@ -1,0 +1,25 @@
+{
+  "name": "pdir/convert-to-bundle",
+  "type":"contao-bundle",
+  "description": "Convert-to bundle for Contao 4",
+  "authors": [
+    {
+      "name": "Webdesign für Dresden",
+      "homepage": "https://pdir.de",
+      "email" : "develop@pdir.de",
+      "role" : "Developer"
+    }
+  ],
+  "require": {
+    "php": "^5.6 || ^7.0",
+    "contao/core-bundle": "^4.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pdir\\ConvertToBundle\\": "src/"
+    }
+  },
+  "extra": {
+    "contao-manager-plugin": "Pdir\\ConvertToBundle\\ContaoManager\\Plugin"
+  }
+}

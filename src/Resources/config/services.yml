@@ -1,0 +1,4 @@
+services:
+    pdir_convert_to.listener.ct_source_data_container:
+    class: Pdir\ConvertTo\EventListener\CtSourceDataContainerListener
+    public: true
