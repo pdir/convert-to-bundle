@@ -2,6 +2,7 @@
   "name": "pdir/convert-to-bundle",
   "type":"contao-bundle",
   "description": "Convert-to bundle for Contao 4",
+  "license": "MIT",
   "authors": [
     {
       "name": "Webdesign für Dresden",
