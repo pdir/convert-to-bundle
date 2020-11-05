@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * Contao Convert To bundle for Contao Open Source CMS
  *
@@ -19,6 +17,7 @@ declare(strict_types=1);
 namespace Pdir\ConvertToBundle\Command;
 
 use Contao\CoreBundle\Framework\ContaoFramework;
+use Pdir\ConvertToBundle\Frontend\Cron;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,7 +26,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Unzip zip file and import estate data from xml file.
  */
-class CovertCommand extends Command
+class ConvertCommand extends Command
 {
     protected static $defaultName = 'convert:run';
     protected $framework;
@@ -44,7 +43,7 @@ class CovertCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure(): void
+    protected function configure()
     {
         $this->setDescription('Run cron tasks of ConvertToBundle.')
         ;
@@ -53,7 +52,7 @@ class CovertCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->framework->initialize();
 
