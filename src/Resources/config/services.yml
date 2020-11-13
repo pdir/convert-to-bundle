@@ -1,4 +1,18 @@
 services:
+    _instanceof:
+        Contao\CoreBundle\Framework\FrameworkAwareInterface:
+            calls:
+                - ["setFramework", ["@contao.framework"]]
+
+        Symfony\Component\DependencyInjection\ContainerAwareInterface:
+            calls:
+                - ["setContainer", ["@service_container"]]
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
     pdir_convert_to.listener.ct_source_data_container:
         class: Pdir\ConvertTo\EventListener\CtSourceDataContainerListener
         public: true
