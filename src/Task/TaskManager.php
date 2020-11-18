@@ -22,28 +22,36 @@ class TaskManager
 {
     protected $task;
 
+    protected $data;
+
+    protected $api;
+
     public function __construct($task)
     {
         $this->task = $task;
     }
 
+    public function setApi($api)
+    {
+        $this->api = $api;
+    }
+
+    public function setData($data)
+    {
+        $this->data = $data;
+    }
+
     public function loadData()
     {
-        $data = '';
-        // @todo load data from remote api
-        // $data = File::getContent($filesModel->path);
-
         // load data from local file
         if ('file' === $this->task->type) {
             $objFile = \FilesModel::findByUuid($this->task->file);
-            $data = file_get_contents(TL_ROOT.'/'.$objFile->path);
+            $this->data = file_get_contents(TL_ROOT.'/'.$objFile->path);
         }
 
         if ('xml' === $this->task->fileType) {
-            return simplexml_load_string($data);
+            $this->data = simplexml_load_string($this->data);
         }
-
-        return $data;
     }
 
     public function loadConvertToModel()
@@ -56,7 +64,7 @@ class TaskManager
         $sourceFile = \FilesModel::findByPath($this->task->filePath);
 
         if ($sourceFile) {
-            $data = $this->loadData();
+            $this->loadData();
 
             if (isset($GLOBALS['TL_HOOKS']['convertToStart'])) {
                 foreach ($GLOBALS['TL_HOOKS']['convertToStart'] as $callback) {
@@ -64,10 +72,26 @@ class TaskManager
                     $this->$callback[0]->$callback[1]($this);
                 }
             }
-
-            $convertToModel = $this->loadConvertToModel();
-            $convertToModel->setDebugMode($this->task->cronDebug);
-            $convertToModel->convert($data);
         }
+
+        if(null === $this->data)
+        {
+            return;
+        }
+
+        $convertToModel = $this->loadConvertToModel();
+        $convertToModel->setDebugMode($this->task->cronDebug);
+
+        if(null !== $this->data)
+        {
+            $convertToModel->setData($this->data);
+        }
+
+        if(null !== $this->api)
+        {
+            $convertToModel->setApi($this->api);
+        }
+
+        $convertToModel->convert();
     }
 }

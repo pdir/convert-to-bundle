@@ -14,6 +14,8 @@
  * file that was distributed with this source code.
  */
 
+use Pdir\ConvertToBundle\EventListener\CtSourceDataContainerListener;
+
 $strTable = 'tl_ct_source';
 
 /*

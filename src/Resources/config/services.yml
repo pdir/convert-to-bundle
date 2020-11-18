@@ -14,5 +14,5 @@ services:
         public: false
 
     pdir_convert_to.listener.ct_source_data_container:
-        class: Pdir\ConvertTo\EventListener\CtSourceDataContainerListener
+        class: Pdir\ConvertToBundle\EventListener\CtSourceDataContainerListener
         public: true
