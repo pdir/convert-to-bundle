@@ -51,8 +51,8 @@ class CtSourceDataContainerListener
     {
         return sprintf('<div style="color: #4b85ba;
             background: #eff5fa;
-            padding: 10px;
-            border-radius: 3px;">%s</div>',
+            padding: 1em;
+            line-height: 1.2em;">%s</div>',
             str_replace('{source_id}', $dc->id, $GLOBALS['TL_LANG']['sourceCronjobExplanation'])
         );
     }

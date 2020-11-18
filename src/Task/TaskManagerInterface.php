@@ -21,4 +21,8 @@ interface TaskManagerInterface
     public function loadData($task);
 
     public function loadConvertToModel($task);
+
+    public function setApi($api);
+
+    public function setData($data);
 }
