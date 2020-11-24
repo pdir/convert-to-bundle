@@ -45,8 +45,13 @@ class TaskManager
     {
         // load data from local file
         if ('file' === $this->task->type) {
-            $objFile = \FilesModel::findByUuid($this->task->file);
-            $this->data = file_get_contents(TL_ROOT.'/'.$objFile->path);
+            $file = \FilesModel::findByUuid($this->task->file);
+            $this->data = file_get_contents(TL_ROOT.'/'.$file->path);
+        }
+
+        if ('filePath' === $this->task->type) {
+            $file = \FilesModel::findByPath($this->task->filePath);
+            $this->data = file_get_contents(TL_ROOT.'/'.$file->path);
         }
 
         if ('xml' === $this->task->fileType) {
@@ -61,34 +66,27 @@ class TaskManager
 
     public function convert()
     {
-        $sourceFile = \FilesModel::findByPath($this->task->filePath);
+        $this->loadData();
 
-        if ($sourceFile) {
-            $this->loadData();
-
-            if (isset($GLOBALS['TL_HOOKS']['convertToStart'])) {
-                foreach ($GLOBALS['TL_HOOKS']['convertToStart'] as $callback) {
-                    $this->import($callback[0]);
-                    $this->$callback[0]->$callback[1]($this);
-                }
-            }
+        if (null === $this->data) {
+            return;
         }
 
-        if(null === $this->data)
-        {
-            return;
+        if (isset($GLOBALS['TL_HOOKS']['convertToStart'])) {
+            foreach ($GLOBALS['TL_HOOKS']['convertToStart'] as $callback) {
+                $this->import($callback[0]);
+                $this->$callback[0]->$callback[1]($this);
+            }
         }
 
         $convertToModel = $this->loadConvertToModel();
         $convertToModel->setDebugMode($this->task->cronDebug);
 
-        if(null !== $this->data)
-        {
+        if (null !== $this->data) {
             $convertToModel->setData($this->data);
         }
 
-        if(null !== $this->api)
-        {
+        if (null !== $this->api) {
             $convertToModel->setApi($this->api);
         }
 
