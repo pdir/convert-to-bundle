@@ -26,9 +26,14 @@ class TaskManager
 
     protected $api;
 
+    private $debugMode = 0;
+
     public function __construct($task)
     {
         $this->task = $task;
+
+        // set debug mode from task
+        $this->debugMode = $this->task->cronDebug;
     }
 
     public function setApi($api)
@@ -39,6 +44,11 @@ class TaskManager
     public function setData($data)
     {
         $this->data = $data;
+    }
+
+    public function setDebugMode($mode)
+    {
+        $this->debugMode = $mode;
     }
 
     public function loadData()
@@ -80,7 +90,7 @@ class TaskManager
         }
 
         $convertToModel = $this->loadConvertToModel();
-        $convertToModel->setDebugMode($this->task->cronDebug);
+        $convertToModel->setDebugMode($this->debugMode);
 
         if (null !== $this->data) {
             $convertToModel->setData($this->data);
