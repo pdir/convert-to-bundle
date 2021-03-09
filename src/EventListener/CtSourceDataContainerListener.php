@@ -53,7 +53,7 @@ class CtSourceDataContainerListener
             background: #eff5fa;
             padding: 1em;
             line-height: 1.2em;">%s</div>',
-            str_replace('{source_id}', $dc->id, $GLOBALS['TL_LANG']['sourceCronjobExplanation'])
+            str_replace('{source_id}', $dc->id, $GLOBALS['TL_LANG']['tl_ct_source']['sourceCronjobExplanation'])
         );
     }
 }
