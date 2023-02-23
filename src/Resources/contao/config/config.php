@@ -53,6 +53,13 @@ $GLOBALS['CONVERT_TO']['SOURCE_MODEL'] = array_merge(
 /*
  * Sources types
  */
+
+$GLOBALS['CONVERT_TO'] = $GLOBALS['CONVERT_TO'] ?? [];
+
+if (true !== array_key_exists('SOURCE_TYPE', $GLOBALS['CONVERT_TO'])) {
+    array_insert($GLOBALS['CONVERT_TO'], 1, ['SOURCE_TYPE' => []]);
+}
+
 $GLOBALS['CONVERT_TO']['SOURCE_TYPE'] = array_merge(
     (array) $GLOBALS['CONVERT_TO']['SOURCE_TYPE'], [
         'file' => 'Pdir\ConvertToBundle\Source\File',
