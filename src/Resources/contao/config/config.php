@@ -14,7 +14,9 @@
  * file that was distributed with this source code.
  */
 
-array_insert($GLOBALS['BE_MOD'], 1, ['convert_to' => []]);
+use Contao\ArrayUtil;
+
+ArrayUtil::arrayInsert($GLOBALS['BE_MOD'], 1, ['convert_to' => []]);
 
 $GLOBALS['BE_MOD']['pdir']['ct_source'] = [
     'tables' => ['tl_ct_source'],
@@ -53,14 +55,13 @@ $GLOBALS['CONVERT_TO']['SOURCE_MODEL'] = array_merge(
 /*
  * Sources types
  */
-
 $GLOBALS['CONVERT_TO'] = $GLOBALS['CONVERT_TO'] ?? [];
 
-if (true !== array_key_exists('SOURCE_TYPE', $GLOBALS['CONVERT_TO'])) {
-    array_insert($GLOBALS['CONVERT_TO'], 1, ['SOURCE_TYPE' => []]);
+if (true !== \array_key_exists('SOURCE_TYPE', $GLOBALS['CONVERT_TO'])) {
+    \array_insert($GLOBALS['CONVERT_TO'], 1, ['SOURCE_TYPE' => []]);
 }
 
-$GLOBALS['CONVERT_TO']['SOURCE_TYPE'] = array_merge(
+$GLOBALS['CONVERT_TO']['SOURCE_TYPE'] = \array_merge(
     (array) $GLOBALS['CONVERT_TO']['SOURCE_TYPE'], [
         'file' => 'Pdir\ConvertToBundle\Source\File',
     ]

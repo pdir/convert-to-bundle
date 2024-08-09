@@ -16,7 +16,11 @@
 
 namespace Pdir\ConvertToBundle\Model;
 
-class Source extends \Model
+use Contao\Model;
+use Contao\System;
+use Pdir\ConvertToBundle\Source\SourceInterface;
+
+class Source extends Model
 {
     /**
      * Name of the current table.
@@ -43,20 +47,20 @@ class Source extends \Model
         if (null === $this->objSource) {
             $strClass = $GLOBALS['CONVERT_TO']['SOURCE_TYPE'][$this->type];
             if (!class_exists($strClass)) {
-                \System::log(sprintf('Could not find source class "%s".', $strClass), __METHOD__, TL_ERROR);
+                System::log(sprintf('Could not find source class "%s".', $strClass), __METHOD__, TL_ERROR);
 
                 return null;
             }
             try {
                 $objSource = new $strClass($this);
                 if (!$objSource instanceof SourceInterface) {
-                    \System::log(sprintf('The source class "%s" must be an instance of SourceInterface.', $strClass), __METHOD__, TL_ERROR);
+                    System::log(sprintf('The source class "%s" must be an instance of SourceInterface.', $strClass), __METHOD__, TL_ERROR);
 
                     return null;
                 }
                 $this->objSource = $objSource;
             } catch (\Exception $e) {
-                \System::log(sprintf('There was a general error building the source: "%s".', $e->getMessage()), __METHOD__, TL_ERROR);
+                System::log(sprintf('There was a general error building the source: "%s".', $e->getMessage()), __METHOD__, TL_ERROR);
 
                 return null;
             }

@@ -16,9 +16,10 @@
 
 namespace Pdir\ConvertToBundle\Source;
 
+use Contao\Controller;
 use Pdir\ConvertToBundle\Model\Source;
 
-abstract class Base extends \Controller
+abstract class Base extends Controller
 {
     /**
      * The source model.

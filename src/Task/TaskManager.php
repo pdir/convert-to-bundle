@@ -17,6 +17,7 @@
 namespace Pdir\ConvertToBundle\Task;
 
 use Contao\File;
+use Contao\FilesModel;
 
 class TaskManager
 {
@@ -55,12 +56,12 @@ class TaskManager
     {
         // load data from local file
         if ('file' === $this->task->type) {
-            $file = \FilesModel::findByUuid($this->task->file);
+            $file = FilesModel::findByUuid($this->task->file);
             $this->data = file_get_contents(TL_ROOT.'/'.$file->path);
         }
 
         if ('filePath' === $this->task->type) {
-            $file = \FilesModel::findByPath($this->task->filePath);
+            $file = FilesModel::findByPath($this->task->filePath);
             $this->data = file_get_contents(TL_ROOT.'/'.$file->path);
         }
 

@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-use Pdir\ConvertToBundle\EventListener\CtSourceDataContainerListener;
+use Contao\Database;
 
 $strTable = 'tl_ct_source';
 
@@ -68,7 +68,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'label' => &$GLOBALS['TL_LANG'][$strTable]['delete'],
                 'href' => 'act=delete',
                 'icon' => 'delete.gif',
-                'attributes' => 'onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['MSC']['deleteConfirm'].'\'))return false;Backend.getScrollOffset()"',
+                'attributes' => 'onclick="if(!confirm(\''.($GLOBALS['TL_LANG']['MSC']['deleteConfirm']?? '').'\'))return false;Backend.getScrollOffset()"',
             ],
             'show' => [
                 'label' => &$GLOBALS['TL_LANG'][$strTable]['show'],
@@ -110,7 +110,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'exclude' => true,
             'filter' => true,
             'inputType' => 'select',
-            'options' => array_keys($GLOBALS['CONVERT_TO']['SOURCE_TYPE']),
+            'options' => \array_keys($GLOBALS['CONVERT_TO']['SOURCE_TYPE']),
             'reference' => &$GLOBALS['TL_LANG'][$strTable]['type'],
             'eval' => ['mandatory' => true, 'includeBlankOption' => true, 'submitOnChange' => true, 'tl_class' => 'w50'],
             'sql' => "varchar(32) NOT NULL default ''",
@@ -120,7 +120,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'exclude' => true,
             'filter' => true,
             'inputType' => 'select',
-            'options' => array_keys($GLOBALS['CONVERT_TO']['SOURCE_MODEL']),
+            'options' => \array_keys($GLOBALS['CONVERT_TO']['SOURCE_MODEL']?? []),
             'reference' => &$GLOBALS['TL_LANG'][$strTable]['model'],
             'eval' => ['mandatory' => true, 'includeBlankOption' => true, 'submitOnChange' => true, 'tl_class' => 'w50'],
             'sql' => "varchar(32) NOT NULL default ''",
@@ -132,7 +132,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options_callback' => function () {
                 $options = [];
-                $sources = \Database::getInstance()->prepare('SELECT id,title FROM tl_ct_source WHERE type!=?')
+                $sources = Database::getInstance()->prepare('SELECT id,title FROM tl_ct_source WHERE type!=?')
                     ->execute('file');
                 while ($sources->next()) {
                     $options[$sources->id] = $sources->title;

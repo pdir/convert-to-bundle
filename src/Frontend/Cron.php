@@ -16,6 +16,7 @@
 
 namespace Pdir\ConvertToBundle\Frontend;
 
+use Contao\System;
 use Pdir\ConvertToBundle\Model\Source;
 use Pdir\ConvertToBundle\Task\TaskManager;
 
@@ -64,7 +65,7 @@ class Cron
             $taskManager = new TaskManager($task);
             $taskManager->convert();
 
-            \System::log(sprintf('Convert To task: "%s".', $task->title), __METHOD__, TL_CRON);
+            System::log(sprintf('Convert To task: "%s".', $task->title), __METHOD__, TL_CRON);
         }
     }
 }
