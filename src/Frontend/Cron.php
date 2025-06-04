@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Contao Convert To bundle for Contao Open Source CMS
  *
- * Copyright (c) 2020 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    convert-to-bundle
  * @link       https://pdir.de/docs/de/contao/extensions/convert-to/
@@ -21,27 +23,27 @@ use Pdir\ConvertToBundle\Task\TaskManager;
 
 class Cron
 {
-    public function minutely()
+    public function minutely(): void
     {
         $this->runTasks('minutely');
     }
 
-    public function hourly()
+    public function hourly(): void
     {
         $this->runTasks('hourly');
     }
 
-    public function daily()
+    public function daily(): void
     {
         $this->runTasks('daily');
     }
 
-    public function weekly()
+    public function weekly(): void
     {
         $this->runTasks('weekly');
     }
 
-    public function monthly()
+    public function monthly(): void
     {
         $this->runTasks('monthly');
     }
@@ -51,7 +53,7 @@ class Cron
      *
      * @param string $interval
      */
-    private function runTasks($interval)
+    private function runTasks($interval): void
     {
         $tasks = Source::findSourceByInterval($interval);
 
@@ -59,7 +61,7 @@ class Cron
             return;
         }
 
-        /** @var $taskManager \Pdir\ConvertToBundle\Task\TaskManagerInterface */
+        /** @var \Pdir\ConvertToBundle\Task\TaskManagerInterface $taskManager */
         foreach ($tasks as $task) {
             $taskManager = new TaskManager($task);
             $taskManager->convert();

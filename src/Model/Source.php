@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Contao Convert To bundle for Contao Open Source CMS
  *
- * Copyright (c) 2020 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    convert-to-bundle
  * @link       https://pdir.de/docs/de/contao/extensions/convert-to/
@@ -42,13 +44,16 @@ class Source extends \Model
         // We only need to build the source once, Model is cached by registry and Source does not change between messages
         if (null === $this->objSource) {
             $strClass = $GLOBALS['CONVERT_TO']['SOURCE_TYPE'][$this->type];
+
             if (!class_exists($strClass)) {
                 \System::log(sprintf('Could not find source class "%s".', $strClass), __METHOD__, TL_ERROR);
 
                 return null;
             }
+
             try {
                 $objSource = new $strClass($this);
+
                 if (!$objSource instanceof SourceInterface) {
                     \System::log(sprintf('The source class "%s" must be an instance of SourceInterface.', $strClass), __METHOD__, TL_ERROR);
 
@@ -71,7 +76,7 @@ class Source extends \Model
      * @param string $interval
      * @param array  $options
      *
-     * @return Source[]|null
+     * @return array<Source>|null
      */
     public static function findSourceByInterval($interval, $options = [])
     {

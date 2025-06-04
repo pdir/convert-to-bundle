@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Contao Convert To bundle for Contao Open Source CMS
  *
- * Copyright (c) 2020 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    convert-to-bundle
  * @link       https://pdir.de/docs/de/contao/extensions/convert-to/
@@ -16,7 +18,6 @@
 
 namespace Pdir\ConvertToBundle\EventListener;
 
-use Contao\Backend;
 use Contao\DataContainer;
 use Pdir\ConvertToBundle\Model\Source;
 
@@ -35,6 +36,7 @@ class CtSourceDataContainerListener
     {
         $model = Source::findByPk($row['id']);
         $source = $model->getSource();
+
         if ($source instanceof LabelCallbackInterface) {
             return $source->getLabel($row, $label, $dc, $args);
         }
@@ -49,7 +51,8 @@ class CtSourceDataContainerListener
      */
     public function sourceCronjobExplanation(DataContainer $dc)
     {
-        return sprintf('<div style="color: #4b85ba;
+        return sprintf(
+            '<div style="color: #4b85ba;
             background: #eff5fa;
             padding: 1em;
             line-height: 1.2em;">%s</div>',

@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Contao Convert To bundle for Contao Open Source CMS
  *
- * Copyright (c) 2020 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    convert-to-bundle
  * @link       https://pdir.de/docs/de/contao/extensions/convert-to/
@@ -15,8 +17,6 @@
  */
 
 namespace Pdir\ConvertToBundle\Task;
-
-use Contao\File;
 
 class TaskManager
 {
@@ -36,22 +36,22 @@ class TaskManager
         $this->debugMode = $this->task->cronDebug;
     }
 
-    public function setApi($api)
+    public function setApi($api): void
     {
         $this->api = $api;
     }
 
-    public function setData($data)
+    public function setData($data): void
     {
         $this->data = $data;
     }
 
-    public function setDebugMode($mode)
+    public function setDebugMode($mode): void
     {
         $this->debugMode = $mode;
     }
 
-    public function loadData()
+    public function loadData(): void
     {
         // load data from local file
         if ('file' === $this->task->type) {
@@ -74,7 +74,7 @@ class TaskManager
         return new $GLOBALS['CONVERT_TO']['SOURCE_MODEL'][$this->task->model]();
     }
 
-    public function convert()
+    public function convert(): void
     {
         $this->loadData();
 

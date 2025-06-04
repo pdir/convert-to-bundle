@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Contao Convert To bundle for Contao Open Source CMS
  *
- * Copyright (c) 2020 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    convert-to-bundle
  * @link       https://pdir.de/docs/de/contao/extensions/convert-to/
@@ -20,7 +22,7 @@ use PHPUnit\Framework\TestCase;
 
 class PdirConvertToBundleTest extends TestCase
 {
-    public function testCanBeInstantiated()
+    public function testCanBeInstantiated(): void
     {
         $bundle = new PdirCovertToBundle();
 

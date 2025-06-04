@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Contao Convert To bundle for Contao Open Source CMS
  *
- * Copyright (c) 2020 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    convert-to-bundle
  * @link       https://pdir.de/docs/de/contao/extensions/convert-to/
@@ -21,7 +23,7 @@ class File extends Base implements SourceInterface
     /**
      * get file to run source task.
      *
-     * @param   Task
+     * @param Task $objSource
      * @param   array
      * @param   string
      *
