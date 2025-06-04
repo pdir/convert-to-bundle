@@ -3,17 +3,28 @@
   "type":"contao-bundle",
   "description": "Convert-to bundle for Contao 4",
   "license": "MIT",
+  "homepage": "https://pdir.de",
   "authors": [
     {
       "name": "Webdesign für Dresden",
       "homepage": "https://pdir.de",
-      "email" : "develop@pdir.de",
-      "role" : "Developer"
+      "email": "develop@pdir.de",
+      "role": "Developer"
     }
   ],
   "require": {
-    "php": "^5.6 || ^7.0 || ^8.0",
-    "contao/core-bundle": "^4.4"
+    "php": "^8.0",
+    "contao/core-bundle": "^4.13 || ^5.3"
+  },
+  "require-dev": {
+    "bamarni/composer-bin-plugin": "^1.5",
+    "contao/manager-plugin": "^2.0",
+    "contao/easy-coding-standard": "^3.0",
+    "phpunit/phpunit": "^7.1 || ^8.4 || ^9.5",
+    "symfony/phpunit-bridge": "^4.4 || ^5.1",
+    "phpstan/phpstan": "^1.8",
+    "phpstan/phpstan-phpunit": "^1.1",
+    "phpstan/phpstan-symfony": "^1.2"
   },
   "autoload": {
     "psr-4": {
@@ -22,5 +33,14 @@
   },
   "extra": {
     "contao-manager-plugin": "Pdir\\ConvertToBundle\\ContaoManager\\Plugin"
+  },
+  "config": {
+    "allow-plugins": {
+      "bamarni/composer-bin-plugin": true,
+      "contao-components/installer": true,
+      "php-http/discovery": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "contao/manager-plugin": true
+    }
   }
 }

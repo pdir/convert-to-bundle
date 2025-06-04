@@ -1,13 +1,12 @@
+Developing & Pull Request
+-------------------------
 
-# for development
+Run the PHP-CS-Fixer and the unit tests before you make a pull request to the bundle:
 
-run PHP-CS-FIXER before commit
+    vendor/bin/ecs check src tests
+    vendor/bin/phpstan analyse
+    vendor/bin/phpunit --colors=always
 
-    sh tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src
+Run cypress tests against demo data
 
-# Install PHP-CS-FIXER
-
-visit https://github.com/FriendsOfPHP/PHP-CS-Fixer for more information
-
-    mkdir --parents tools/php-cs-fixer
-    composer require --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer
+    npm run cypress:open or yarn run cypress open
