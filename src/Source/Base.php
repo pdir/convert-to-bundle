@@ -31,8 +31,6 @@ abstract class Base extends \Controller
 
     /**
      * Set model.
-     *
-     * @param Source $objModel
      */
     public function __construct(Source $objModel)
     {

@@ -18,8 +18,11 @@ declare(strict_types=1);
 
 namespace Pdir\ConvertToBundle\Frontend;
 
+use Contao\CoreBundle\Monolog\ContaoContext;
+use Contao\System;
 use Pdir\ConvertToBundle\Model\Source;
 use Pdir\ConvertToBundle\Task\TaskManager;
+use Pdir\ConvertToBundle\Task\TaskManagerInterface;
 
 class Cron
 {
@@ -55,18 +58,25 @@ class Cron
      */
     private function runTasks($interval): void
     {
+        $logger = System::getContainer()->get('monolog.logger.contao');
+
+        $context = new ContaoContext(
+            __METHOD__,
+            ContaoContext::ERROR,
+        );
+
         $tasks = Source::findSourceByInterval($interval);
 
         if (null === $tasks) {
             return;
         }
 
-        /** @var \Pdir\ConvertToBundle\Task\TaskManagerInterface $taskManager */
+        /** @var TaskManagerInterface $taskManager */
         foreach ($tasks as $task) {
             $taskManager = new TaskManager($task);
             $taskManager->convert();
 
-            \System::log(sprintf('Convert To task: "%s".', $task->title), __METHOD__, TL_CRON);
+            $logger->error(sprintf('Convert To task: "%s".', $task->title), ['convert-to-bundle' => $context]);
         }
     }
 }
