@@ -34,10 +34,8 @@ class Source extends Model
 
     /**
      * Source instance.
-     *
-     * @var SourceInterface
      */
-    protected $objSource;
+    protected SourceInterface $objSource;
 
     /**
      * Get source instance.

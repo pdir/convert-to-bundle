@@ -20,6 +20,7 @@ namespace Pdir\ConvertToBundle\EventListener;
 
 use Contao\DataContainer;
 use Pdir\ConvertToBundle\Model\Source;
+use Pdir\ConvertToBundle\Source\SourceInterface;
 
 class CtSourceDataContainerListener
 {
@@ -28,16 +29,13 @@ class CtSourceDataContainerListener
      *
      * @param array  $row
      * @param string $label
-     * @param array  $args
-     *
-     * @return string
      */
-    public function executeLabelCallback($row, $label, DataContainer $dc, $args)
+    public function executeLabelCallback($row, $label, DataContainer $dc, array $args): string
     {
         $model = Source::findByPk($row['id']);
         $source = $model->getSource();
 
-        if ($source instanceof LabelCallbackInterface) {
+        if ($source instanceof SourceInterface) {
             return $source->getLabel($row, $label, $dc, $args);
         }
 
@@ -46,10 +44,8 @@ class CtSourceDataContainerListener
 
     /**
      * Gets the cron job explanation.
-     *
-     * @return string
      */
-    public function sourceCronjobExplanation(DataContainer $dc)
+    public function sourceCronjobExplanation(DataContainer $dc): string
     {
         return sprintf(
             '<div style="color: #4b85ba;

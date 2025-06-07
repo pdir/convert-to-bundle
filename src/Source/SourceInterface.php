@@ -18,14 +18,14 @@ declare(strict_types=1);
 
 namespace Pdir\ConvertToBundle\Source;
 
+use Pdir\ConvertToBundle\Model\Source;
+
 interface SourceInterface
 {
     /**
      * Run the task.
      *
      * @param Task $objSource
-     *
-     * @return bool
      */
-    public function run(Source $objSource);
+    public function run(Source $objSource): bool;
 }

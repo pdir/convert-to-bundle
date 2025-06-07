@@ -18,16 +18,15 @@ declare(strict_types=1);
 
 namespace Pdir\ConvertToBundle\Source;
 
+use Contao\DataContainer;
 use Pdir\ConvertToBundle\Model\Source;
 
 abstract class Base extends \Controller
 {
     /**
      * The source model.
-     *
-     * @var Source
      */
-    protected $objModel;
+    protected Source $objModel;
 
     /**
      * Set model.
@@ -39,11 +38,28 @@ abstract class Base extends \Controller
 
     /**
      * Gets the source model.
-     *
-     * @return Source
      */
-    public function getModel()
+    public function getModel(): Source
     {
         return $this->objModel;
+    }
+
+    /**
+     * Gets the back end list label.
+     */
+    public function getLabel(array $row, string $label, DataContainer $dc, array $args): string
+    {
+        $targetModel = Source::findByPk($row['id']);
+
+        if (null === $targetModel) {
+            return $label;
+        }
+
+        $label .= sprintf(
+            '<div style="color:#ccc;margin:5px 0 0 10px;">&#8627; %s</div>',
+            $targetModel->title
+        );
+
+        return $label;
     }
 }
