@@ -10,7 +10,7 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-## [1.2.0](https://github.com/pdir/convert-to-bundle/tree/1.2.0) – 2025-06-04
+## [1.2.0](https://github.com/pdir/convert-to-bundle/tree/1.2.0) – 2025-06-24
 
 - [Added] Support for Contao 5.3 and higher
 - [Removed] Support for Contao 4.4
