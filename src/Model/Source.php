@@ -50,7 +50,7 @@ class Source extends Model
         );
 
         // We only need to build the source once, Model is cached by registry and Source does not change between messages
-        if (null === $this->objSource) {
+        if (!$this->objSource) {
             $strClass = $GLOBALS['CONVERT_TO']['SOURCE_TYPE'][$this->type];
 
             if (!class_exists($strClass)) {

@@ -26,6 +26,6 @@ class PdirConvertToBundleTest extends TestCase
     {
         $bundle = new PdirCovertToBundle();
 
-        $this->assertInstanceOf('Pdir\ConvertToBundle\PdirConvertToBundle', $bundle);
+        $this->assertInstanceOf(\Pdir\ConvertToBundle\PdirConvertToBundle::class, $bundle);
     }
 }

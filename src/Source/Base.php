@@ -24,16 +24,15 @@ use Pdir\ConvertToBundle\Model\Source;
 abstract class Base extends \Controller
 {
     /**
-     * The source model.
-     */
-    protected Source $objModel;
-
-    /**
      * Set model.
      */
-    public function __construct(Source $objModel)
+    public function __construct(
+        /**
+         * The source model.
+         */
+        protected Source $objModel
+    )
     {
-        $this->objModel = $objModel;
     }
 
     /**
@@ -55,11 +54,9 @@ abstract class Base extends \Controller
             return $label;
         }
 
-        $label .= sprintf(
+        return $label . sprintf(
             '<div style="color:#ccc;margin:5px 0 0 10px;">&#8627; %s</div>',
             $targetModel->title
         );
-
-        return $label;
     }
 }

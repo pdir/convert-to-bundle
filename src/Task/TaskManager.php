@@ -23,18 +23,14 @@ use Contao\System;
 
 class TaskManager
 {
-    protected $task;
-
     protected $data;
 
     protected $api;
 
     private $debugMode = 0;
 
-    public function __construct($task)
+    public function __construct(protected $task)
     {
-        $this->task = $task;
-
         // set debug mode from task
         $this->debugMode = $this->task->cronDebug;
     }
