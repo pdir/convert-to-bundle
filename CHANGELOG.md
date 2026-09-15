@@ -10,6 +10,12 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+## [1.3.0](https://github.com/pdir/convert-to-bundle/tree/1.3.0) – 2026-09-15
+
+- [Changed] Updated command configuration for Symfony Console compatibility
+- [Removed] Removed deprecated ContainerAwareInterface service configuration
+- [Changed] Updated DCA configuration for Contao 5 compatibility
+
 ## [1.2.0](https://github.com/pdir/convert-to-bundle/tree/1.2.0) – 2025-06-24
 
 - [Added] Support for Contao 5.3 and higher

@@ -14,7 +14,8 @@
  * file that was distributed with this source code.
  */
 
-use Pdir\ConvertToBundle\EventListener\CtSourceDataContainerListener;
+use Contao\Database;
+use Contao\DC_Table;
 
 $strTable = 'tl_ct_source';
 
@@ -24,7 +25,7 @@ $strTable = 'tl_ct_source';
 $GLOBALS['TL_DCA'][$strTable] = [
     // Config
     'config' => [
-        'dataContainer' => 'Table',
+        'dataContainer' => DC_Table::class,
         'enableVersioning' => true,
         'sql' => [
             'keys' => [
@@ -132,7 +133,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options_callback' => function () {
                 $options = [];
-                $sources = \Database::getInstance()->prepare('SELECT id,title FROM tl_ct_source WHERE type!=?')
+                $sources = Database::getInstance()->prepare('SELECT id,title FROM tl_ct_source WHERE type!=?')
                     ->execute('file');
                 while ($sources->next()) {
                     $options[$sources->id] = $sources->title;
