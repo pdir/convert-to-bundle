@@ -30,7 +30,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  */
 class ConvertCommand extends Command
 {
-    protected static $defaultName = 'convert:run';
     protected $framework;
     private $io;
     private $rows = [];
@@ -47,14 +46,15 @@ class ConvertCommand extends Command
      */
     protected function configure(): void
     {
-        $this->setDescription('Run cron tasks of ConvertToBundle.')
-        ;
+        $this
+            ->setName('convert:run')
+            ->setDescription('Run cron tasks of ConvertToBundle.');
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->framework->initialize();
 
