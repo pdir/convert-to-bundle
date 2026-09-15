@@ -4,10 +4,6 @@ services:
             calls:
                 - ["setFramework", ["@contao.framework"]]
 
-        Symfony\Component\DependencyInjection\ContainerAwareInterface:
-            calls:
-                - ["setContainer", ["@service_container"]]
-
     _defaults:
         autowire: true
         autoconfigure: true
