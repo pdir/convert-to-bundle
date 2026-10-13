@@ -10,7 +10,7 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-## [1.3.0](https://github.com/pdir/convert-to-bundle/tree/1.3.0) – 2026-10-06
+## [1.3.0](https://github.com/pdir/convert-to-bundle/tree/1.3.0) – 2026-10-13
 
 - [Changed] Updated command configuration for Symfony Console compatibility
 - [Removed] Removed deprecated ContainerAwareInterface service configuration
